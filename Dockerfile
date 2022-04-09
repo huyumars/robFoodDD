@@ -17,9 +17,7 @@ RUN GOOS=linux CGO_ENABLED=0 go build -ldflags="-s -w" -installsuffix cgo -o rob
 
 
 FROM ubuntu
-RUN apt-get update
-RUN update-ca-certificates
-ADD ca-certification.cer /ets/ssl/certs
+COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=build /go/release/robFoodDD /bin/robFoodDD
 
 

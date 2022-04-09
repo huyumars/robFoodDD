@@ -82,10 +82,15 @@ cartLoop:
           switch err {
           case nil:
             fmt.Println("抢购成功，请前往app付款！")
+            // notify 3 times
+            notify := 3
             for true {
               err = session.PushSuccess()
               if err == nil {
-                break
+                notify--
+                if notify == 0 {
+                  break
+                }
               } else {
                 fmt.Println(err)
               }
